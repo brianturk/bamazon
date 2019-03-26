@@ -1,0 +1,28 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "mysql and node JavaScript homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianturk/bamazon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brianturk/bamazon/issues"
+  },
+  "homepage": "https://github.com/brianturk/bamazon#readme",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "easy-table": "^1.1.1",
+    "inquirer": "^6.2.2",
+    "mysql": "^2.16.0",
+    "table": "^5.2.3",
+    "tty-table": "^2.7.0"
+  }
+}
