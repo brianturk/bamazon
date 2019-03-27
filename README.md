@@ -3,7 +3,7 @@ mySQL and node JavaScript homework
 Author: Brian Turk  
 Date: 3/25/19
 
-## [Video Demonstration](https://photos.app.goo.gl/9eZKYB1XLZjagCMF8)
+## [Video Demonstration](https://photos.app.goo.gl/9z1Ukiz6h7GGNvDJ6)
 
 
 ## What this project does
