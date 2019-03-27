@@ -1,11 +1,8 @@
 const inquirer = require('inquirer');
 const TtyTable = require('tty-table');
-var {conn} = require('./shared.js');
-var {getSQL} = require('./shared.js');
-var {formatter} = require('./shared.js');
-
-
-
+var {conn} = require('./lib/shared.js');
+var {getSQL} = require('./lib/shared.js');
+var {formatter} = require('./lib/shared.js');
 
 
 //start here
@@ -39,7 +36,7 @@ async function buyItem(resultText) {
                         message: 'Enter the [ID] of the item you would like to buy (Type "exit" to leave the store):',
                         name: 'itemId',
                         validate: function (input) {
-                            if (input != 'exit') {
+                            if (input.toLowerCase() != 'exit') {
                                 if (isNaN(input)) {
                                     return 'Invalid Item ID.'
                                 } else if (!Number.isInteger(Number(input))) {

@@ -1,29 +1,9 @@
 const inquirer = require('inquirer');
 const TtyTable = require('tty-table');
-var {conn} = require('./shared.js');
-var {getSQL} = require('./shared.js');
-var {formatter} = require('./shared.js');
-var {formatterNumber} = require('./shared.js');
-
-
-// const conn = mysql.createConnection({
-//     host: "localhost",
-//     port: 3306,
-//     user: "root",
-//     password: process.env.MYSQL_PASSWORD,
-//     database: "bamazon"
-// });
-
-// // node native promisify
-// const query = util.promisify(conn.query).bind(conn);
-
-// const formatter = new Intl.NumberFormat('en-US', {
-//     style: 'currency',
-//     currency: 'USD',
-//     minimumFractionDigits: 2
-// })
-
-
+var {conn} = require('./lib/shared.js');
+var {getSQL} = require('./lib/shared.js');
+var {formatter} = require('./lib/shared.js');
+var {formatterNumber} = require('./lib/shared.js');
 
 
 //start here
@@ -179,9 +159,17 @@ function getDepartments() {
 
 function noDupeProduct(productName, departmentName) {
     return new Promise(async function (resolve, reject) {
-        var results = await getSQL(`SELECT count(*) as num FROM products WHERE 
-                                    product_name = "${productName}" AND 
-                                    department_name = "${departmentName}"`)
+        var results = await getSQL(`SELECT 
+                                        count(*) as num 
+                                    FROM 
+                                        products as a 
+                                            left join
+                                        departments as b
+                                            on
+                                            a.department_id = b.department_id
+                                    WHERE 
+                                        a.product_name = "${productName}" AND 
+                                        b.department_name = "${departmentName}"`)
 
 
         if (results[0]) {
@@ -214,6 +202,7 @@ function addProductIn(productName, departmentName, price, stockQuantity) {
                                         stock_quantity = ${stockQuantity}
                                         `)
 
+        
         if (results.insertId) {
             console.log(`\nAdded item.  New Item ID is "${results.insertId}"\n`);
             resolve(true);
@@ -247,7 +236,6 @@ async function addProduct() {
                     if (isNaN(input)) {
                         return 'Invalid Price'
                     } else {
-
                         var reg = /^[0-9]+(\.[0-9]{1,2})?$/gm
                         let price = parseFloat(input)
                         if (reg.test(price)) {
@@ -387,18 +375,4 @@ function viewProducts(lowInventory) {
     })
 }
 
-// function getSQL(sqlText) {
-//     return new Promise(async function (resolve, reject) {
-//         try {
-//             const rows = await query(sqlText);
-//             resolve(rows);
-//         }
-//         catch (err) {
-//             resolve(err)
-//         }
-//         finally {
-//             // conn.end();
-//         }
-//     })
-// }
 
