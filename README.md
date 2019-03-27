@@ -1,5 +1,5 @@
 # bamazon
-mySQL and node JavaScript homework
+mySQL and node JavaScript homework  
 Author: Brian Turk  
 Date: 3/25/19
 
